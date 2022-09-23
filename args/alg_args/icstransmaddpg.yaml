@@ -1,0 +1,48 @@
+alg: "icstransmaddpg"
+
+alg_args:
+    "policy_lrate": 1.0e-4
+    "value_lrate": 1.0e-5
+    "agent_type": "GAT"
+    "gaussian_policy": False
+    "action_enforcebound": True
+
+    # for actor
+    "encoder": True
+    "pretrained": null # None / encoder.pth
+
+    # for actor encoder
+    "auxiliary": False
+    "auxiliary_update_epochs": 10
+    "auxiliary_lrate": 1.0e-5 # encoder_lrate = auxiliary_lrate
+
+    # for critic
+    "critic_type": "transformer" # "transformer" "mlp"
+    "attend_heads": 4
+    "n_layers": 2
+    "critic_encoder": True
+    "use_emb": "glimpsed" # "glimpsed" or "mean"
+    "value_grad": True
+    "merge_act": False
+
+    # for cost (not used)
+    "cost_loss": False
+    "cost_head_lrate": 1.0e-4
+    "split_constraint": True
+    "cost_type": "agent"
+
+    "multiplier": False
+    "init_lambda": 0.
+    "lambda_lrate": 5.0e-5
+    "upper_bound": 0.
+    "cost_gamma": 0.
+
+    # for GAT
+    "GAT_num_of_layers": 3
+    "GAT_head_num": 4
+    "GAT_skip_Residual": False
+    "bias": True
+    "dropout": 0.2
+    "GAT_lr": 5.0e-6
+    "concat": False
+

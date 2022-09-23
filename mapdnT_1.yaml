@@ -1,0 +1,26 @@
+user_name: wangy
+passwd: 123456
+job_name: mapdnt
+job_type: rls
+cluster: default
+image: mcc.ustc.com/library/wangy/mapdn:v2
+remote_storage:
+  remote_server: 169.252.198.3
+  remote_path: /NAS_DATA/NAS_DATA/wangy/MAPDNT
+  mount_dir: /workspace/mapdnT
+rls:
+  replicas: 1
+  cpu: 2
+  gpu: 2
+  memory: 32Gi
+  command:
+    - cd /workspace/mapdnT
+    - echo ". /home/wangy/.conda/etc/profile.d/conda.sh" >> ~/.profile
+    - echo "conda activate mapdn" >> ~/.profile
+    - sed -i '9c tty -s && mesg n' ~/.profile
+    - source ~/.profile
+    - pip install wandb
+    - wandb login bf5326e7159e67a5c23c78fe74dfca223674bfb1
+#    - python train.py --alg maddpg --alias 0 --mode distributed --scenario case141_3min_final --qweight 0.01 --voltage-barrier-type l1 --save-path trial
+    - source train_322.sh 0 l2
+  submit_args:
